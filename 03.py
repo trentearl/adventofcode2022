@@ -1,8 +1,6 @@
 
 lines = [ l.strip() for l in open('./03.data', 'r').readlines() ]
 
-print(lines)
-
 def val(l):
     if l.islower():
         return 1 + ord(l) - ord('a')
@@ -10,10 +8,14 @@ def val(l):
         return 27 + ord(l) - ord('A')
 
 ans = 0
+buf = []
 for line in lines:
-    N = len(line)
-    shared = (set(line[:N // 2]) & set(line[N // 2:])).pop()
-    print(shared, val(shared))
-    ans += val(shared)
+    buf.append(set(line))
+
+    if len(buf) == 3:
+        v = val((buf[0] & buf[1] & buf[2]).pop())
+        ans += v
+        buf = []
 
 print(ans)
+
