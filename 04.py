@@ -9,7 +9,7 @@ jobs = [ list(map(makeSections, l.strip().split(','))) for l in open('./04.data'
 ans = 0
 
 for a, b in jobs:
-    if not len(a - b) or not len(b - a):
+    if a & b:
         ans += 1
 print(ans)
 
